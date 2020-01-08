@@ -39,13 +39,15 @@ trait HasRelationships
     /**
      * Define a one-to-one relationship.
      *
-     * @param string            $related
+     * @param string $related
      * @param string|array|null $foreignKey
      * @param string|array|null $localKey
      *
+     * @param null $relationName
      * @return \Awobaz\Compoships\Database\Eloquent\Relations\HasOne
+     * @throws \Awobaz\Compoships\Exceptions\InvalidUsageException
      */
-    public function hasOne($related, $foreignKey = null, $localKey = null)
+    public function hasOne($related, $foreignKey = null, $localKey = null, $relationName = null)
     {
         if (is_array($foreignKey)) { //Check for multi-columns relationship
             $this->validateRelatedModel($related);
@@ -107,13 +109,15 @@ trait HasRelationships
     /**
      * Define a one-to-many relationship.
      *
-     * @param string            $related
+     * @param string $related
      * @param string|array|null $foreignKey
      * @param string|array|null $localKey
      *
+     * @param null $relationName
      * @return \Awobaz\Compoships\Database\Eloquent\Relations\HasMany
+     * @throws \Awobaz\Compoships\Exceptions\InvalidUsageException
      */
-    public function hasMany($related, $foreignKey = null, $localKey = null)
+    public function hasMany($related, $foreignKey = null, $localKey = null, $relationName = null)
     {
         if (is_array($foreignKey)) { //Check for multi-columns relationship
             $this->validateRelatedModel($related);
@@ -156,14 +160,16 @@ trait HasRelationships
     /**
      * Define an inverse one-to-one or many relationship.
      *
-     * @param string            $related
+     * @param string $related
      * @param string|array|null $foreignKey
      * @param string|array|null $ownerKey
-     * @param string            $relation
+     * @param string $relation
      *
+     * @param null $relationName
      * @return \Awobaz\Compoships\Database\Eloquent\Relations\BelongsTo
+     * @throws \Awobaz\Compoships\Exceptions\InvalidUsageException
      */
-    public function belongsTo($related, $foreignKey = null, $ownerKey = null, $relation = null)
+    public function belongsTo($related, $foreignKey = null, $ownerKey = null, $relation = null, $relationName = null)
     {
         if (is_array($foreignKey)) { //Check for multi-columns relationship
             $this->validateRelatedModel($related);
